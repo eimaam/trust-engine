@@ -62,7 +62,7 @@ export const sendError = ({
         {
             success: false,
             message,
-            error: process.env.NODE_ENV !== 'production' ? error : undefined,
+            error: (c.env?.NODE_ENV as string || process.env?.NODE_ENV) !== 'production' ? error : undefined,
             code,
         },
         status

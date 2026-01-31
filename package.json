@@ -4,9 +4,11 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsup src/index.ts --format esm --clean --minify",
-    "start": "node dist/index.js",
+    "dev": "tsx watch src/server.ts",
+    "dev:worker": "wrangler dev",
+    "build": "tsup src/server.ts --format esm --clean --minify",
+    "start": "node dist/server.js",
+    "deploy": "wrangler deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,16 +24,17 @@
   "homepage": "https://github.com/eimaam/trust-engine#readme",
   "dependencies": {
     "@hono/node-server": "^1.19.9",
-    "axios": "^1.13.4",
     "bottleneck": "^2.19.5",
     "dotenv": "^17.2.3",
     "hono": "^4.11.7",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260131.0",
     "@types/node": "^25.1.0",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "wrangler": "^4.61.1"
   }
 }

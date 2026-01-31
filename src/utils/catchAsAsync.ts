@@ -23,7 +23,7 @@ export const catchAsync = (handler: ControllerHandler) => {
             return sendError({
                 c,
                 message: error.message || 'Internal Server Error',
-                error: process.env.NODE_ENV === 'development' ? error : undefined
+                error: (c.env?.NODE_ENV as string || process.env?.NODE_ENV) !== 'production' ? error : undefined
             });
         }
     };
