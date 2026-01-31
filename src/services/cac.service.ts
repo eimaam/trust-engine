@@ -1,9 +1,9 @@
 import { CacApiResponse, CacVerificationRequest } from '../schemas/cac.schema';
 import { cacheService } from '../utils/cache';
 import { throttlerService } from '../utils/throttler';
+import { config } from '../config/env';
 
 class CacService {
-    private readonly baseUrl = 'CAC_API_URL_REMOVED';
 
     /**
      * throttler configuration:
@@ -29,15 +29,15 @@ class CacService {
 
     private async performSearch(params: CacVerificationRequest, cacheKey: string, retryCount = 0): Promise<CacApiResponse> {
         try {
-            const response = await fetch(this.baseUrl, {
+            const response = await fetch(config.CAC_API_URL, {
                 method: 'POST',
                 headers: {
                     'Accept': '*/*',
                     'Accept-Language': 'en-NG,en-US;q=0.9,en;q=0.8,ar-SA;q=0.7,ar;q=0.6',
                     'Connection': 'keep-alive',
                     'Content-Type': 'application/json',
-                    'Origin': 'CAC_ORIGIN_REMOVED',
-                    'Referer': 'CAC_ORIGIN_REMOVED/public-search',
+                    'Origin': config.CAC_ORIGIN,
+                    'Referer': config.CAC_REFERER,
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36',
                 },
                 body: JSON.stringify({
